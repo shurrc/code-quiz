@@ -9,7 +9,7 @@
     //reset button to reset global highscores
 var newGameButton = document.getElementById("new-game");
 var questionDisplay = document.getElementById("question-display");
-var question = document.getElementById("question");
+var questionContainer = document.getElementById("question");
 var choiceContainer = document.getElementById("Choices");
 var timeContainer = document.getElementById("time-container");
 var timeCountdown = document.getElementById("timer")
@@ -18,7 +18,8 @@ var scores = document.getElementById("scores");
 var resetButton = document.getElementById("reset-button")
 //Data
 var questionList = ["Q1", "Q2", "Q3", "Q4", "Q5"];
-var answerList = ["A1", "A2", "A3", "A4"];
+var incorrectAnswerList = ["A1", "A2", "A3", "A4"];
+var correctAnswerList = ["CA1","CA2","CA3","CA4", "CA5"];
 var question = "";
 var selectedAnswer = "";
 var timer = {}; //going to hold the timer passed from set interval
@@ -46,11 +47,16 @@ var resetButtonCallBack = function(event) {
 //functions
 // will fill in appropriate answers when the question is chosen
 function chooseQuestion() {
-
+    for(var i=0; i<questionList.length; i++) {
+        question = questionList[i];
+    }
 };
 
 function displayQuestion() {
-
+    questionContainer.innerHtml = "";
+    for(var i=0; i<question.length; i++){
+        questionContainer.textContent = question;
+    }
 };
 
 function displayAnswers() {
@@ -67,6 +73,8 @@ function startTimer() {
         timeCountdown.textContent = countdownRemaining;
     }, 1000);
 };
+chooseQuestion();
+displayQuestion();
 startTimer()
 
 newGameButton.addEventListener("click", newGameButtonCallBack);
