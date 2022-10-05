@@ -17,6 +17,17 @@ var highscoreContainer = document.getElementById("highscore-conatiner")
 var scores = document.getElementById("scores");
 var resetButton = document.getElementById("reset-button")
 //Data
+var questionList = ["Q1", "Q2", "Q3", "Q4", "Q5"];
+var answerList = ["A1", "A2", "A3", "A4"];
+var question = "";
+var selectedAnswer = "";
+var timer = {}; //going to hold the timer passed from set interval
+var countdownRemaining = 15;
+var points = 0;
+var highscore = {
+    name: "",
+    score: ""
+};
 
 //array with the question and answers
 //variable to conatin the wuestions
@@ -27,7 +38,22 @@ var resetButton = document.getElementById("reset-button")
 //variable to save scores in local storage
 
 //functions
-//
+// will fill in appropriate answers when the question is chosen
+function chooseQuestion() {
+
+};
+
+function displayQuestion() {
+
+};
+
+function displayAnswers() {
+    
+}
+
+function startTimer() {
+
+};
 
 
 //user experience 
