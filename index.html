@@ -8,23 +8,21 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
+    <header id="new-game-container">
         <h1>Javascript Quiz Game</h1>
         <button id="new-game">new game</button>
     </header>
     <main>
+        <section id="time-container">
+            <h2>timer</h2>
+            <p><span id="timer"></span> seconds remaining</p>
+        </section>
         <section id="question-display">
             <h2 id="question">Question</h2>
-            <ol id="choices">
-                <li id="answer-1"></li>
-                <li id="answer-2"></li>
-                <li id="answer-3"></li>
-                <li id="answer-4"></li>
-            </ol>
+            <div id="answers">
+            </div>
+            <p id="feedback"></p>
         </section>
-        <section id="time-container"></section>
-            <h2>timer</h2>
-            <p><span id="timer">""</span> seconds remaining</p>
         <div id="highscore-container">
             <h3>Highscores</h3>
             <ol>

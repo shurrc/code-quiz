@@ -10,20 +10,25 @@
 var newGameButton = document.getElementById("new-game");
 var questionDisplay = document.getElementById("question-display");
 var questionContainer = document.getElementById("question");
-var choiceContainer = document.getElementById("Choices");
+var answers = document.getElementById("answers");
 var timeContainer = document.getElementById("time-container");
 var timeCountdown = document.getElementById("timer")
 var highscoreContainer = document.getElementById("highscore-conatiner")
 var scores = document.getElementById("scores");
 var resetButton = document.getElementById("reset-button")
+var newGameContainer = document.getElementById("new-game-container");
+var feedback = document.getElementById("feedback");
 //Data
-var questionList = ["Q1", "Q2", "Q3", "Q4", "Q5"];
-var incorrectAnswerList = ["A1", "A2", "A3", "A4"];
-var correctAnswerList = ["CA1","CA2","CA3","CA4", "CA5"];
-var question = "";
+var questions = [
+    {question: "What is this?", correctAnswer: "an object", choices: [ "an array", "a hotdog", "an object", "a function"]},
+    {question: "What is that?", correctAnswer: "an bject", choices: [ "an rray", "a hot", "an bject", "a funon"]},
+    {question: "What is this?", correctAnswer: "anay", choices: [ "anay", "otdog", "object", "a fction"]}
+]
+var questionIndex = 0    
+var questionHolder = "";
 var selectedAnswer = "";
-var timer = {}; //going to hold the timer passed from set interval
-var countdownRemaining = 15;
+var timer; //going to hold the timer passed from set interval
+var countdownRemaining = 120;
 var points = 0;
 var highscore = {
     name: "",
@@ -46,38 +51,80 @@ var resetButtonCallBack = function(event) {
 
 //functions
 // will fill in appropriate answers when the question is chosen
+function startQuiz() {
+    newGameContainer.style.display = "none";
+    questionDisplay.style.display = "block";
+    startTimer();
+    displayQuestion();
+}
+
 function chooseQuestion() {
-    for(var i=0; i<questionList.length; i++) {
-        question = questionList[i];
-    }
+    
 };
 
 function displayQuestion() {
-    questionContainer.innerHtml = "";
-    for(var i=0; i<question.length; i++){
-        questionContainer.textContent = question;
+    if (questionIndex === questions.length) {
+        endGame();
+        return;
+    }
+    questionContainer.textContent = questions[questionIndex].question;
+    answers.innerHTML = "";
+    for(var i=0; i<questions[questionIndex].choices.length; i++){
+        var element = document.createElement("button")
+        element.textContent = questions[questionIndex].choices[i];
+        element.addEventListener("click", verifyAnswer);
+        answers.append(element);
     }
 };
 
-function displayAnswers() {
+function verifyAnswer(event) {
+    if (event.target.innerText === questions[questionIndex].correctAnswer) {
+        countdownRemaining += 5;
+        feedback.textContent = "Correct!"
+        feedback.style.color = "green"
+        setTimeout(function() {
+            feedback.textContent = ""
+            feedback.style.color = "black"
+            questionIndex++;
+            displayQuestion();
+        },1000)
 
+    } else {
+        countdownRemaining -= 5;
+        feedback.textContent = "Wrong!"
+        feedback.style.color = "red"
+        setTimeout(function() {
+            feedback.textContent = ""
+            feedback.style.color = "black"
+            questionIndex++;
+            displayQuestion();
+            },1000)
+    } 
+    console.log(event);
+}
+
+function endGame() {
+//hide element 
+//input name
+//
 }
 
 function startTimer() {
     timeCountdown.textContent=countdownRemaining;
     timer = setInterval(function() {
         countdownRemaining--;
-        if (countdownRemaining===0){
+        if (countdownRemaining<=0){
             clearInterval(timer);
+            endGame()
         }
         timeCountdown.textContent = countdownRemaining;
     }, 1000);
 };
-chooseQuestion();
-displayQuestion();
-startTimer()
+// chooseQuestion();
+// displayQuestion();
+// startTimer();
 
-newGameButton.addEventListener("click", newGameButtonCallBack);
+newGameButton.addEventListener("click", startQuiz);
 resetButton.addEventListener("click",resetButtonCallBack)
 //user experience 
 //The user will be able to click the start button
