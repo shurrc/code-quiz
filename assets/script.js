@@ -12,7 +12,7 @@ var questionDisplay = document.getElementById("question-display");
 var question = document.getElementById("question");
 var choiceContainer = document.getElementById("Choices");
 var timeContainer = document.getElementById("time-container");
-var timer = document.getElementById("timer")
+var timeCountdown = document.getElementById("timer")
 var highscoreContainer = document.getElementById("highscore-conatiner")
 var scores = document.getElementById("scores");
 var resetButton = document.getElementById("reset-button")
@@ -28,7 +28,13 @@ var highscore = {
     name: "",
     score: ""
 };
+var newGameButtonCallBack = function(event) {
+    event.stopPropagation();
 
+}
+var resetButtonCallBack = function(event) {
+    event.stopPropagation();
+}
 //array with the question and answers
 //variable to conatin the wuestions
 //variable to hold the answers
@@ -48,14 +54,23 @@ function displayQuestion() {
 };
 
 function displayAnswers() {
-    
+
 }
 
 function startTimer() {
-
+    timeCountdown.textContent=countdownRemaining;
+    timer = setInterval(function() {
+        countdownRemaining--;
+        if (countdownRemaining===0){
+            clearInterval(timer);
+        }
+        timeCountdown.textContent = countdownRemaining;
+    }, 1000);
 };
+startTimer()
 
-
+newGameButton.addEventListener("click", newGameButtonCallBack);
+resetButton.addEventListener("click",resetButtonCallBack)
 //user experience 
 //The user will be able to click the start button
     //once this happens the timer will start
