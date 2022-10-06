@@ -13,7 +13,7 @@ var questionContainer = document.getElementById("question");
 var answers = document.getElementById("answers");
 var timeContainer = document.getElementById("time-container");
 var timeCountdown = document.getElementById("timer")
-var highscoreContainer = document.getElementById("highscore-conatiner")
+var highscoreContainer = document.getElementById("highscore-container")
 var scores = document.getElementById("scores");
 var resetButton = document.getElementById("reset-button")
 var newGameContainer = document.getElementById("new-game-container");
@@ -80,6 +80,7 @@ function displayQuestion() {
 function verifyAnswer(event) {
     if (event.target.innerText === questions[questionIndex].correctAnswer) {
         countdownRemaining += 5;
+        points++;
         feedback.textContent = "Correct!"
         feedback.style.color = "green"
         setTimeout(function() {
@@ -105,8 +106,10 @@ function verifyAnswer(event) {
 
 function endGame() {
 //hide element 
+    newGameContainer.style.display = "block";
+    document.getElementById("highscore-container").style.display = "block"
+    document.getElementById("question-display").style.display = "none"
 //input name
-//
 }
 
 function startTimer() {
