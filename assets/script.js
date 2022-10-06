@@ -22,10 +22,11 @@ var submitButton = document.getElementById("submit-button");
 var player = document.getElementById("name");
 //Data
 var questions = [
-    {question: "What is this?", correctAnswer: "an object", choices: [ "an array", "a hotdog", "an object", "a function"]},
-    {question: "What is that?", correctAnswer: "an bject", choices: [ "an rray", "a hot", "an bject", "a funon"]},
-    {question: "What is this?", correctAnswer: "anay", choices: [ "anay", "otdog", "object", "a fction"]}
-]
+    {question: "What is a variable that holds a group of data?", correctAnswer: "an array", choices: [ "an array", "a hotdog", "an object", "a function"]},
+    {question: "What do you use to locate a single item inside of an array?", correctAnswer: "an index", choices: [ "a function", "a scope", "an index", "variables"]},
+    {question: "What does the default keyword 'this' refer to?", correctAnswer: "the global object", choices: [ "the console", "the ladder", "the global object", "a social media post"]},
+    {question: "How do you select an element by ID?", correctAnswer: "getElementById", choices: [ "querySelector", "#", "screamItsName", "getElementById"]}
+];
 var questionIndex = 0    
 var questionHolder = "";
 var selectedAnswer = "";
@@ -129,7 +130,7 @@ function startTimer() {
         // answers.append(element);
 function submitHighscore() {
     var element = document.createElement("li");
-    element.textContent = player.value,points;
+    element.textContent = player.value;
     scores.append(element);
 }
  //take input and create a string 
