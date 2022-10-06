@@ -13,11 +13,13 @@ var questionContainer = document.getElementById("question");
 var answers = document.getElementById("answers");
 var timeContainer = document.getElementById("time-container");
 var timeCountdown = document.getElementById("timer")
-var highscoreContainer = document.getElementById("highscore-container")
+var highscoreContainer = document.getElementById("highscore-container");
 var scores = document.getElementById("scores");
 var resetButton = document.getElementById("reset-button")
 var newGameContainer = document.getElementById("new-game-container");
 var feedback = document.getElementById("feedback");
+var submitButton = document.getElementById("submit-button");
+var player = document.getElementById("name");
 //Data
 var questions = [
     {question: "What is this?", correctAnswer: "an object", choices: [ "an array", "a hotdog", "an object", "a function"]},
@@ -57,10 +59,6 @@ function startQuiz() {
     startTimer();
     displayQuestion();
 }
-
-function chooseQuestion() {
-    
-};
 
 function displayQuestion() {
     if (questionIndex === questions.length) {
@@ -109,6 +107,7 @@ function endGame() {
     newGameContainer.style.display = "block";
     document.getElementById("highscore-container").style.display = "block"
     document.getElementById("question-display").style.display = "none"
+    clearInterval(timer);
 //input name
 }
 
@@ -123,12 +122,30 @@ function startTimer() {
         timeCountdown.textContent = countdownRemaining;
     }, 1000);
 };
+
+        // var element = document.createElement("button")
+        // element.textContent = questions[questionIndex].choices[i];
+        // element.addEventListener("click", verifyAnswer);
+        // answers.append(element);
+function submitHighscore() {
+    var element = document.createElement("li");
+    element.textContent = player.value,points;
+    scores.append(element);
+}
+ //take input and create a string 
+    //package that up with points
+    //create a list item
+    //append it into the OL
+
+
 // chooseQuestion();
 // displayQuestion();
 // startTimer();
 
 newGameButton.addEventListener("click", startQuiz);
-resetButton.addEventListener("click",resetButtonCallBack)
+resetButton.addEventListener("click",resetButtonCallBack);
+submitButton.addEventListener("click", submitHighscore)
+
 //user experience 
 //The user will be able to click the start button
     //once this happens the timer will start
