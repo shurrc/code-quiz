@@ -33,10 +33,7 @@ var selectedAnswer = "";
 var timer; //going to hold the timer passed from set interval
 var countdownRemaining = 120;
 var points = 0;
-var highscore = {
-    name: "",
-    score: ""
-};
+
 var newGameButtonCallBack = function(event) {
     event.stopPropagation();
 
@@ -55,13 +52,17 @@ var resetButtonCallBack = function(event) {
 //functions
 // will fill in appropriate answers when the question is chosen
 function startQuiz() {
+    console.log("hello");
     newGameContainer.style.display = "none";
     questionDisplay.style.display = "block";
+    highscoreContainer.style.display = "none";
+    questionIndex = 0;
     startTimer();
     displayQuestion();
 }
 
 function displayQuestion() {
+    console.log("index" + questionIndex);
     if (questionIndex === questions.length) {
         endGame();
         return;
@@ -100,14 +101,14 @@ function verifyAnswer(event) {
             displayQuestion();
             },1000)
     } 
-    console.log(event);
+    // console.log(event);
 }
 
 function endGame() {
 //hide element 
     newGameContainer.style.display = "block";
-    document.getElementById("highscore-container").style.display = "block"
-    document.getElementById("question-display").style.display = "none"
+    highscoreContainer.style.display = "block";
+    questionDisplay.style.display = "none";
     clearInterval(timer);
 //input name
 }
@@ -130,8 +131,22 @@ function startTimer() {
         // answers.append(element);
 function submitHighscore() {
     var element = document.createElement("li");
-    element.textContent = player.value;
+    element.textContent = player.value + "-" + points;
     scores.append(element);
+
+    //package the player name and points in an object
+    var highScore = {
+        name: player.value, 
+        score: points
+    };
+    //get item, add to it
+    var leaderBoard = JSON.parse(localStorage.getItem("highScore"));
+    console.log(leaderBoard);
+    //put them in local storage
+    //
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+    
+    //
 }
  //take input and create a string 
     //package that up with points
